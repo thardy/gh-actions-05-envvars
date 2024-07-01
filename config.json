@@ -1,4 +1,4 @@
 {
-  "apiUrl": "#{API_URL}",
+  "apiUrl": "${API_URL}",
   "env": "local",
 }
