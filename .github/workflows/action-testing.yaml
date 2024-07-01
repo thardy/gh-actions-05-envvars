@@ -17,6 +17,11 @@ jobs:
           from_file: 'config.json'
           to_file: 'config.json'
           commit: 'false'
+
+      - name: Get cat output
+        id: configFile
+        run: |
+          echo "content=$(cat config.json)" >> $GITHUB_OUTPUT
           
 #      - name: Replace tokens in relevant k8s yamls
 #        uses: cschleiden/replace-tokens@v1
@@ -24,12 +29,14 @@ jobs:
 #          tokenPrefix: '#{'
 #          tokenSuffix: '}'
 #          files: '["./config.json"]'
+
+
           
-      - name:  Read config.json file
-        id: configFile
-        uses: jaywcjlove/github-action-read-file@main
-        with:
-          localfile: ./config.json
+#      - name:  Read config.json file
+#        id: configFile
+#        uses: jaywcjlove/github-action-read-file@main
+#        with:
+#          localfile: ./config.json
 
       - name: Echo config.json
         run: echo "${{ steps.configFile.outputs.content }}"
