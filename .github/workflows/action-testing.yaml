@@ -14,10 +14,12 @@ jobs:
           tokenPrefix: '#{'
           tokenSuffix: '}'
           files: '["./config.json"]'
-      
-      - name: Read config.json file
+          
+      - name:  Read config.json file
         id: configFile
-        run: echo "contents=$(cat config.json)" >> $GITHUB_OUTPUT
-      
-      - name: config.json contents
-        run: echo "${ steps.configFile.outputs.contents }"
+        uses: jaywcjlove/github-action-read-file@main
+        with:
+          path: config.json
+
+      - name: Echo config.json
+        run: echo "${{ steps.configFile.outputs.content }}"
