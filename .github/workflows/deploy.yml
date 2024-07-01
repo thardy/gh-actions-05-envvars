@@ -43,3 +43,19 @@ jobs:
           echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
           echo "MONGODB_USERNAME: $MONGODB_USERNAME"
           echo "${{ env.PORT }}"
+      
+      - name: Replace tokens in relevant k8s yamls
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '#{'
+          tokenSuffix: '}'
+          files: '["./config.json"]'
+      
+      - name: Read file contents
+        id: configFile
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "config.json"
+
+      - name: config.json contents
+        run: echo "${ steps.configFile.outputs.contents }"
