@@ -3,8 +3,6 @@ on: workflow_dispatch
 jobs:
   test-some-actions:
     runs-on: ubuntu-latest
-    env:
-      API_URL: ${{ vars.API_URL }}
     steps:
       - name: Get Code
         uses: actions/checkout@v4
@@ -13,6 +11,8 @@ jobs:
 
       - name: Replace tokens in relevant k8s yamls
         uses: franzbischoff/replace_envs@v1
+        env:
+          API_URL: ${{ vars.API_URL }}
         with:
           from_file: 'config.json'
           to_file: 'config.json'
