@@ -21,7 +21,7 @@ jobs:
         id: configFile
         uses: jaywcjlove/github-action-read-file@main
         with:
-          path: config.json
+          localfile: ./config.json
 
       - name: Echo config.json
         run: echo "${{ steps.configFile.outputs.content }}"
