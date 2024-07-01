@@ -14,6 +14,8 @@ jobs:
           tokenPrefix: '#{'
           tokenSuffix: '}'
           files: '["./config.json"]'
+        env:
+          API_URL: https://your-domain.com/api
           
       - name:  Read config.json file
         id: configFile
