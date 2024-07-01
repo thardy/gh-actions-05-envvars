@@ -23,6 +23,7 @@ jobs:
         uses: qetza/replacetokens-action@v1
         with:
           sources: ./config.json
+          token-pattern: 'custom'
           token-prefix: '#{'
           token-suffix: '}'
           variables: '[${{ toJSON(vars) }},${{ toJSON(secrets) }}]' # use variables & secrets
