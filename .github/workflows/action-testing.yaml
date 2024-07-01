@@ -15,11 +15,9 @@ jobs:
           tokenSuffix: '}'
           files: '["./config.json"]'
       
-      - name: Read file contents
+      - name: Read config.json file
         id: configFile
-        uses: andstor/file-reader-action@v1
-        with:
-          path: "config.json"
-
+        run: echo "contents=$(cat config.json)" >> $GITHUB_OUTPUT
+      
       - name: config.json contents
         run: echo "${ steps.configFile.outputs.contents }"
