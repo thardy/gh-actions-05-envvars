@@ -9,14 +9,22 @@ jobs:
       - name: Output directory contents
         run: ls -la
 
-      - name: Replace tokens in relevant k8s yamls
-        uses: franzbischoff/replace_envs@v1
-        env:
-          API_URL: ${{ vars.API_URL }}
+#      - name: Replace tokens in relevant k8s yamls
+#        uses: franzbischoff/replace_envs@v1
+#        env:
+#          API_URL: ${{ vars.API_URL }}
+#        with:
+#          from_file: 'config.json'
+#          to_file: 'config.json'
+#          commit: 'false'
+
+      - name: Replace tokens
+        uses: qetza/replacetokens-action@v1
         with:
-          from_file: 'config.json'
-          to_file: 'config.json'
-          commit: 'false'
+          sources: ./config.json
+          token-prefix: '#{'
+          token-suffix: '}'
+          variables: '[${{ toJSON(vars) }},${{ toJSON(secrets) }}]' # use variables & secrets
 
 #      - name: Replace tokens in relevant k8s yamls
 #        uses: cschleiden/replace-tokens@v1
