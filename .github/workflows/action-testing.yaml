@@ -3,6 +3,8 @@ on: workflow_dispatch
 jobs:
   test-some-actions:
     runs-on: ubuntu-latest
+    env:
+      API_URL: ${{ vars.API_URL }}
     steps:
       - name: Get Code
         uses: actions/checkout@v4
@@ -14,8 +16,6 @@ jobs:
           tokenPrefix: '#{'
           tokenSuffix: '}'
           files: '["./config.json"]'
-        env:
-          API_URL: 'https://your-domain.com/api'
           
       - name:  Read config.json file
         id: configFile
